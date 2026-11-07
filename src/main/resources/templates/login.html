@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Connexion - Application Sécurisée</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; text-align: center; margin-top: 100px; }
+        .login-box {
+            background: white; padding: 25px; border-radius: 8px;
+            width: 320px; margin: auto; box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        input { width: 90%; padding: 8px; margin: 6px 0; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
+        button { padding: 8px 20px; border: none; border-radius: 5px; background: #2b5797; color: white; cursor: pointer; font-weight: bold; width: 90%; }
+        button:hover { background: #1e3f6f; }
+        p.error { color: red; font-size: 0.9rem; margin-top: 10px; }
+        p.logout { color: green; font-size: 0.9rem; margin-top: 10px; }
+        .credentials-info { margin-top: 15px; font-size: 0.8rem; color: #666; text-align: left; background: #f9f9f9; padding: 10px; border-radius: 4px; }
+    </style>
+</head>
+<body>
+<div class="login-box">
+    <h2>Authentification</h2>
+    <form th:action="@{/authenticate}" method="post">
+        <label style="display: block; text-align: left; margin-left: 5%;">Nom d’utilisateur :</label>
+        <input type="text" name="username" placeholder="Saisir le nom d’utilisateur" required autofocus>
+
+        <label style="display: block; text-align: left; margin-left: 5%;">Mot de passe :</label>
+        <input type="password" name="password" placeholder="Mot de passe" required>
+
+        <button type="submit">Se connecter</button>
+    </form>
+
+    <!-- Message d'erreur -->
+    <p th:if="${param.error}" class="error">Identifiants incorrects, veuillez réessayer.</p>
+
+    <!-- Message de déconnexion -->
+    <p th:if="${param.logout}" class="logout">Vous êtes déconnecté avec succès.</p>
+
+    <div class="credentials-info">
+        <strong>Comptes disponibles :</strong><br>
+        • User : <code>user</code> / <code>1111</code> (ROLE_USER)<br>
+        • Admin : <code>admin</code> / <code>1234</code> (ROLE_ADMIN)
+    </div>
+</div>
+</body>
+</html>
